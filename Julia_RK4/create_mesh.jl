@@ -45,4 +45,5 @@ function finalMesh(disc, delay, tmin, tmax, tol = 1e-10, depth = 4)
     mesh =vcat(simplePoints, doubleMesh)
     sort!(mesh)
     filter!(t-> t > tmin && t < tmax,mesh)
+    unique!(mesh)
 end

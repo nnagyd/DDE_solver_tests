@@ -1,4 +1,4 @@
-using DifferentialEquations, Plots, DelimitedFiles, LoopVectorization
+using DifferentialEquations, Plots, DelimitedFiles, LoopVectorization, CPUTime, Statistics
 
 const unroll = 256
 const steps = 10000
