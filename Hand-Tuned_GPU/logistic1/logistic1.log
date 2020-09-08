@@ -1,0 +1,77 @@
+--- SUMMARY ---
+
+==4296== NVPROF is profiling process 4296, command: ./logistic1
+==4296== Profiling application: ./logistic1
+==4296== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   94.79%  456.46ms        32  14.264ms  13.697ms  15.071ms  solver(integrationSettings, double const *, double*)
+                    5.16%  24.869ms        35  710.54us  2.0160us  12.619ms  [CUDA memcpy HtoD]
+                    0.04%  197.28us        32  6.1650us  5.8240us  7.6160us  [CUDA memcpy DtoH]
+No API activities were profiled.
+
+
+--- SPECIFIC METRICS AND EVENTS ---
+
+==4311== NVPROF is profiling process 4311, command: ./logistic1
+==4311== Some kernel(s) will be replayed on device 0 in order to collect all events/metrics.
+==4311== Profiling application: ./logistic1
+==4311== Profiling result:
+==4311== Event result:
+Invocations                                Event Name         Min         Max         Avg       Total
+Device "GeForce GTX TITAN Black (0)"
+    Kernel: solver(integrationSettings, double const *, double*)
+          1                         elapsed_cycles_sm   199460559   199460559   199460559   199460559
+          1                             active_cycles   192542244   192542244   192542244   192542244
+
+==4311== Metric result:
+Invocations                               Metric Name                            Metric Description         Min         Max         Avg
+Device "GeForce GTX TITAN Black (0)"
+    Kernel: solver(integrationSettings, double const *, double*)
+          1                             sm_efficiency                       Multiprocessor Activity      96.53%      96.53%      96.53%
+          1                        achieved_occupancy                            Achieved Occupancy    0.263792    0.263792    0.263792
+          1                  eligible_warps_per_cycle               Eligible Warps Per Active Cycle    4.761842    4.761842    4.761842
+          1                      tex_cache_throughput                      Texture Cache Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                      dram_read_throughput                 Device Memory Read Throughput  89.528GB/s  89.528GB/s  89.528GB/s
+          1                     dram_write_throughput                Device Memory Write Throughput  90.670GB/s  90.670GB/s  90.670GB/s
+          1                            gst_throughput                       Global Store Throughput  95.103GB/s  95.103GB/s  95.103GB/s
+          1                            gld_throughput                        Global Load Throughput  190.20GB/s  190.20GB/s  190.20GB/s
+          1                     local_load_throughput                  Local Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                    local_store_throughput                 Local Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1              gld_transactions_per_request          Global Load Transactions Per Request    1.666678    1.666678    1.666678
+          1              gst_transactions_per_request         Global Store Transactions Per Request    1.666667    1.666667    1.666667
+          1                    shared_load_throughput                 Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                  l1_cache_global_hit_rate                            L1 Global Hit Rate       0.00%       0.00%       0.00%
+          1                   l1_cache_local_hit_rate                             L1 Local Hit Rate       0.00%       0.00%       0.00%
+          1                   shared_store_throughput                Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                        l2_read_throughput                         L2 Throughput (Reads)  190.20GB/s  190.20GB/s  190.20GB/s
+          1                       l2_write_throughput                        L2 Throughput (Writes)  95.103GB/s  95.103GB/s  95.103GB/s
+          1                     l2_l1_read_throughput                      L2 Throughput (L1 Reads)  190.20GB/s  190.20GB/s  190.20GB/s
+          1                    l2_l1_write_throughput                     L2 Throughput (L1 Writes)  95.103GB/s  95.103GB/s  95.103GB/s
+          1                l2_texture_read_throughput                 L2 Throughput (Texture Reads)  0.00000B/s  0.00000B/s  0.00000B/s
+          1                            gld_efficiency                 Global Memory Load Efficiency      95.59%      95.59%      95.59%
+          1                            gst_efficiency                Global Memory Store Efficiency      95.59%      95.59%      95.59%
+          1                         shared_efficiency                      Shared Memory Efficiency       0.00%       0.00%       0.00%
+          1                             flop_count_dp   Floating Point Operations(Double Precision)  6799458304  6799458304  6799458304
+          1                              inst_integer                          Integer Instructions  2457755648  2457755648  2457755648
+          1                        inst_compute_ld_st                       Load/Store Instructions   737320960   737320960   737320960
+          1                        flop_dp_efficiency                  FLOP Efficiency(Peak Double)      26.63%      26.63%      26.63%
+          1                     l1_shared_utilization                  L1/Shared Memory Utilization     Low (1)     Low (1)     Low (1)
+          1                            l2_utilization                          L2 Cache Utilization     Low (3)     Low (3)     Low (3)
+          1                           tex_utilization                     Texture Cache Utilization    Idle (0)    Idle (0)    Idle (0)
+          1                          dram_utilization                     Device Memory Utilization     Mid (6)     Mid (6)     Mid (6)
+          1                        sysmem_utilization                     System Memory Utilization     Low (1)     Low (1)     Low (1)
+          1                       ldst_fu_utilization          Load/Store Function Unit Utilization     Low (3)     Low (3)     Low (3)
+          1                        alu_fu_utilization          Arithmetic Function Unit Utilization     Mid (6)     Mid (6)     Mid (6)
+          1                        tex_fu_utilization             Texture Function Unit Utilization    Idle (0)    Idle (0)    Idle (0)
+          1                           stall_pipe_busy               Issue Stall Reasons (Pipe Busy)       3.84%       3.84%       3.84%
+          1                     stall_exec_dependency    Issue Stall Reasons (Execution Dependency)      36.44%      36.44%      36.44%
+          1                   stall_memory_dependency            Issue Stall Reasons (Data Request)      26.85%      26.85%      26.85%
+          1                          stall_inst_fetch      Issue Stall Reasons (Instructions Fetch)       3.48%       3.48%       3.48%
+          1                             stall_texture                 Issue Stall Reasons (Texture)       0.00%       0.00%       0.00%
+          1                        stall_not_selected            Issue Stall Reasons (Not Selected)      15.42%      15.42%      15.42%
+          1          stall_constant_memory_dependency      Issue Stall Reasons (Immediate constant)       0.00%       0.00%       0.00%
+          1                     stall_memory_throttle         Issue Stall Reasons (Memory Throttle)      12.26%      12.26%      12.26%
+          1                                stall_sync         Issue Stall Reasons (Synchronization)       0.00%       0.00%       0.00%
+          1                               stall_other                   Issue Stall Reasons (Other)       1.70%       1.70%       1.70%
+
+
