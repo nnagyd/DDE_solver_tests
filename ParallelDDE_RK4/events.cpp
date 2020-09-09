@@ -22,7 +22,6 @@ void eventIntervention(int eventId, int eventDir, Vec4db mask, double t, Vec4d* 
         x[0] = select(mask, -0.95 * x[0], x[0]);
         p[1] = select(mask, p[1] + Vec4d(1.0), p[1]);
     }
-
 }
 
 double v0(double t, int)
