@@ -1,40 +1,40 @@
 --- SUMMARY ---
 
-==6188== NVPROF is profiling process 6188, command: ./lorenz.exe
-==6188== Profiling application: ./lorenz.exe
-==6188== Profiling result:
+==9652== NVPROF is profiling process 9652, command: ./lorenz.exe
+==9652== Profiling application: ./lorenz.exe
+==9652== Profiling result:
             Type  Time(%)      Time     Calls       Avg       Min       Max  Name
- GPU activities:   99.71%  388.22ms        16  24.264ms  23.114ms  25.399ms  solver(integrationSettings, double const *, double*)
-                    0.27%  1.0379ms        19  54.627us  1.2800us  459.11us  [CUDA memcpy HtoD]
-                    0.03%  100.06us        16  6.2540us  5.8240us  7.8400us  [CUDA memcpy DtoH]
+ GPU activities:   99.82%  779.41ms        32  24.357ms  22.339ms  25.713ms  solver(integrationSettings, double const *, double*)
+                    0.15%  1.1761ms        35  33.602us  1.2480us  429.54us  [CUDA memcpy HtoD]
+                    0.03%  204.32us        32  6.3850us  5.8240us  7.7440us  [CUDA memcpy DtoH]
 No API activities were profiled.
 
 
 --- SPECIFIC METRICS AND EVENTS ---
 
-==6203== NVPROF is profiling process 6203, command: ./lorenz.exe
-==6203== Some kernel(s) will be replayed on device 0 in order to collect all events/metrics.
-==6203== Profiling application: ./lorenz.exe
-==6203== Profiling result:
-==6203== Event result:
+==9667== NVPROF is profiling process 9667, command: ./lorenz.exe
+==9667== Some kernel(s) will be replayed on device 0 in order to collect all events/metrics.
+==9667== Profiling application: ./lorenz.exe
+==9667== Profiling result:
+==9667== Event result:
 Invocations                                Event Name         Min         Max         Avg       Total
 Device "GeForce GTX TITAN Black (0)"
     Kernel: solver(integrationSettings, double const *, double*)
-          1                         elapsed_cycles_sm   337491798   337491798   337491798   337491798
-          1                             active_cycles   321202636   321202636   321202636   321202636
+          1                         elapsed_cycles_sm   327859914   327859914   327859914   327859914
+          1                             active_cycles   312461557   312461557   312461557   312461557
 
-==6203== Metric result:
+==9667== Metric result:
 Invocations                               Metric Name                            Metric Description         Min         Max         Avg
 Device "GeForce GTX TITAN Black (0)"
     Kernel: solver(integrationSettings, double const *, double*)
-          1                             sm_efficiency                       Multiprocessor Activity      95.04%      95.04%      95.04%
-          1                        achieved_occupancy                            Achieved Occupancy    0.267274    0.267274    0.267274
-          1                  eligible_warps_per_cycle               Eligible Warps Per Active Cycle    4.946935    4.946935    4.946935
-          1                      tex_cache_throughput                      Texture Cache Throughput  2.7068MB/s  2.7068MB/s  2.7068MB/s
-          1                      dram_read_throughput                 Device Memory Read Throughput  50.699GB/s  50.699GB/s  50.699GB/s
-          1                     dram_write_throughput                Device Memory Write Throughput  53.509GB/s  53.509GB/s  53.509GB/s
-          1                            gst_throughput                       Global Store Throughput  56.177GB/s  56.177GB/s  56.177GB/s
-          1                            gld_throughput                        Global Load Throughput  118.82GB/s  118.82GB/s  118.82GB/s
+          1                             sm_efficiency                       Multiprocessor Activity      95.63%      95.63%      95.63%
+          1                        achieved_occupancy                            Achieved Occupancy    0.267167    0.267167    0.267167
+          1                  eligible_warps_per_cycle               Eligible Warps Per Active Cycle    4.347298    4.347298    4.347298
+          1                      tex_cache_throughput                      Texture Cache Throughput  2.7949MB/s  2.7949MB/s  2.7949MB/s
+          1                      dram_read_throughput                 Device Memory Read Throughput  52.348GB/s  52.348GB/s  52.348GB/s
+          1                     dram_write_throughput                Device Memory Write Throughput  55.197GB/s  55.197GB/s  55.197GB/s
+          1                            gst_throughput                       Global Store Throughput  58.006GB/s  58.006GB/s  58.006GB/s
+          1                            gld_throughput                        Global Load Throughput  122.69GB/s  122.69GB/s  122.69GB/s
           1                     local_load_throughput                  Local Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
           1                    local_store_throughput                 Local Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
           1              gld_transactions_per_request          Global Load Transactions Per Request    1.502607    1.502607    1.502607
@@ -43,18 +43,18 @@ Device "GeForce GTX TITAN Black (0)"
           1                  l1_cache_global_hit_rate                            L1 Global Hit Rate       0.00%       0.00%       0.00%
           1                   l1_cache_local_hit_rate                             L1 Local Hit Rate       0.00%       0.00%       0.00%
           1                   shared_store_throughput                Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
-          1                        l2_read_throughput                         L2 Throughput (Reads)  118.82GB/s  118.82GB/s  118.82GB/s
-          1                       l2_write_throughput                        L2 Throughput (Writes)  56.177GB/s  56.177GB/s  56.177GB/s
-          1                     l2_l1_read_throughput                      L2 Throughput (L1 Reads)  118.82GB/s  118.82GB/s  118.82GB/s
-          1                    l2_l1_write_throughput                     L2 Throughput (L1 Writes)  56.177GB/s  56.177GB/s  56.177GB/s
-          1                l2_texture_read_throughput                 L2 Throughput (Texture Reads)  2.7068MB/s  2.7068MB/s  2.7068MB/s
+          1                        l2_read_throughput                         L2 Throughput (Reads)  122.69GB/s  122.69GB/s  122.69GB/s
+          1                       l2_write_throughput                        L2 Throughput (Writes)  58.006GB/s  58.006GB/s  58.006GB/s
+          1                     l2_l1_read_throughput                      L2 Throughput (L1 Reads)  122.69GB/s  122.69GB/s  122.69GB/s
+          1                    l2_l1_write_throughput                     L2 Throughput (L1 Writes)  58.006GB/s  58.006GB/s  58.006GB/s
+          1                l2_texture_read_throughput                 L2 Throughput (Texture Reads)  2.7949MB/s  2.7949MB/s  2.7949MB/s
           1                            gld_efficiency                 Global Memory Load Efficiency      91.74%      91.74%      91.74%
           1                            gst_efficiency                Global Memory Store Efficiency      95.59%      95.59%      95.59%
           1                         shared_efficiency                      Shared Memory Efficiency       0.00%       0.00%       0.00%
-          1                             flop_count_dp   Floating Point Operations(Double Precision)  1.3845e+10  1.3845e+10  1.3845e+10
+          1                             flop_count_dp   Floating Point Operations(Double Precision)  1.3107e+10  1.3107e+10  1.3107e+10
           1                              inst_integer                          Integer Instructions  2771877888  2771877888  2771877888
           1                        inst_compute_ld_st                       Load/Store Instructions   979705856   979705856   979705856
-          1                        flop_dp_efficiency                  FLOP Efficiency(Peak Double)      32.05%      32.05%      32.05%
+          1                        flop_dp_efficiency                  FLOP Efficiency(Peak Double)      31.23%      31.23%      31.23%
           1                     l1_shared_utilization                  L1/Shared Memory Utilization     Low (1)     Low (1)     Low (1)
           1                            l2_utilization                          L2 Cache Utilization     Low (2)     Low (2)     Low (2)
           1                           tex_utilization                     Texture Cache Utilization     Low (1)     Low (1)     Low (1)
@@ -63,14 +63,14 @@ Device "GeForce GTX TITAN Black (0)"
           1                       ldst_fu_utilization          Load/Store Function Unit Utilization     Low (2)     Low (2)     Low (2)
           1                        alu_fu_utilization          Arithmetic Function Unit Utilization     Mid (6)     Mid (6)     Mid (6)
           1                        tex_fu_utilization             Texture Function Unit Utilization     Low (1)     Low (1)     Low (1)
-          1                           stall_pipe_busy               Issue Stall Reasons (Pipe Busy)       3.53%       3.53%       3.53%
-          1                     stall_exec_dependency    Issue Stall Reasons (Execution Dependency)      39.61%      39.61%      39.61%
-          1                   stall_memory_dependency            Issue Stall Reasons (Data Request)      25.76%      25.76%      25.76%
-          1                          stall_inst_fetch      Issue Stall Reasons (Instructions Fetch)       7.63%       7.63%       7.63%
+          1                           stall_pipe_busy               Issue Stall Reasons (Pipe Busy)       2.80%       2.80%       2.80%
+          1                     stall_exec_dependency    Issue Stall Reasons (Execution Dependency)      46.24%      46.24%      46.24%
+          1                   stall_memory_dependency            Issue Stall Reasons (Data Request)      22.47%      22.47%      22.47%
+          1                          stall_inst_fetch      Issue Stall Reasons (Instructions Fetch)       7.29%       7.29%       7.29%
           1                             stall_texture                 Issue Stall Reasons (Texture)       0.00%       0.00%       0.00%
-          1                        stall_not_selected            Issue Stall Reasons (Not Selected)      15.76%      15.76%      15.76%
+          1                        stall_not_selected            Issue Stall Reasons (Not Selected)      12.70%      12.70%      12.70%
           1          stall_constant_memory_dependency      Issue Stall Reasons (Immediate constant)       0.00%       0.00%       0.00%
-          1                     stall_memory_throttle         Issue Stall Reasons (Memory Throttle)       6.46%       6.46%       6.46%
+          1                     stall_memory_throttle         Issue Stall Reasons (Memory Throttle)       7.26%       7.26%       7.26%
           1                                stall_sync         Issue Stall Reasons (Synchronization)       0.00%       0.00%       0.00%
           1                               stall_other                   Issue Stall Reasons (Other)       1.24%       1.24%       1.24%
 

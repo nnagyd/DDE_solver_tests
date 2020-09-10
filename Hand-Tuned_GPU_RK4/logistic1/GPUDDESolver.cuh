@@ -29,40 +29,36 @@ struct threadVariables
 	double t, tTmp, dt;
 
 	//memory loads
-	double tb,xb,xn,xdb,xdn,deltat;
+	double tb,xb,xn,xdb,xdn,pdeltat;
 };
 
-
-__forceinline__ __device__ unsigned int findIndex(double t, threadVariables * __restrict__ vars, integrationSettings intSettings)
+__forceinline__ __device__ void loadValues(double t, threadVariables  * vars, integrationSettings intSettings)
 {
-	for (unsigned int i = (*vars).lastIndex; i < intSettings.nrOfPoints; i++)
+	unsigned int i = (*vars).lastIndex;
+	unsigned int step;
+	if(t < intSettings.tVals[i]) //on correct step
 	{
-		if (t < intSettings.tVals[i])
-		{
-			if (i >= 1) (*vars).lastIndex = i;
-			else (*vars).lastIndex = 0;
-			return i;
-		}
+		step = i-1;
 	}
-	return (unsigned int)0;
-}
+	else //next step is needed
+	{
+		step = i;
+		unsigned int linIdx = (step + 1) * intSettings.nrOfParameters + (*vars).threadId;
+		(*vars).lastIndex++;
+		(*vars).tb = intSettings.tVals[step];
+		(*vars).xb = (*vars).xn;
+		(*vars).xn = intSettings.xVals[linIdx];
+		(*vars).xdb = (*vars).xdn;
+		(*vars).xdn = intSettings.xdVals[linIdx];
+	}
 
-__forceinline__ __device__ void loadValues(double t, threadVariables  * __restrict__ vars, integrationSettings intSettings)
-{
-	unsigned int step = findIndex(t, vars, intSettings) - 1;
-	(*vars).tb = intSettings.tVals[step];
-	(*vars).xb = intSettings.xVals[step * intSettings.nrOfParameters + (*vars).threadId];
-	(*vars).xn = intSettings.xVals[(step + 1) * intSettings.nrOfParameters + (*vars).threadId];
-	(*vars).xdb = intSettings.xdVals[step * intSettings.nrOfParameters + (*vars).threadId];
-	(*vars).xdn = intSettings.xdVals[(step + 1) * intSettings.nrOfParameters + (*vars).threadId];
-	(*vars).deltat = intSettings.tVals[step+1] - (*vars).tb;
 }
-
 
 __forceinline__ __device__ double denseOutput(double t, threadVariables  * __restrict__ vars, integrationSettings intSettings)
 {
-	double theta = (t - (*vars).tb) / (*vars).deltat;
-	double res = (1 - theta)*(*vars).xb + theta * (*vars).xn + theta * (theta - 1)*((1 - 2 * theta)*((*vars).xn - (*vars).xb) + (theta - 1)*(*vars).deltat*(*vars).xdb + theta * (*vars).deltat*(*vars).xdn);
+	double theta = (t - (*vars).tb) * (*vars).pdeltat;
+	double thetaM1 = theta - 1;
+	double res = -1. * thetaM1 * (*vars).xb + theta * ((*vars).xn + thetaM1 * (1. - 2.*theta)*((*vars).xn-(*vars).xb)+(*vars).dt*(thetaM1*(*vars).xdb + theta*(*vars).xdn));
 	return res;
 }
 
@@ -81,8 +77,15 @@ __global__ void solver(integrationSettings intSettings, const double * parameter
 
 	//initialize thread variables
 	vars.dt = intSettings.dt;
+	vars.pdeltat = 1.0 / vars.dt;
 	vars.t = 0;
 	vars.lastIndex = 0;
+
+	vars.tb = intSettings.tVals[0];
+	vars.xb = intSettings.xVals[0];
+	vars.xn = intSettings.xVals[1];
+	vars.xdb= intSettings.xdVals[0];
+	vars.xdn= intSettings.xdVals[1];
 
 	//read initial values
 	unsigned int idx,idxLin;
@@ -141,7 +144,7 @@ __global__ void solver(integrationSettings intSettings, const double * parameter
 		intSettings.tVals[idx] = vars.t;
 		intSettings.xVals[idxLin] = vars.x;
 
-		//printf("t=%6.3lf  x=%6.3lf\n",vars.t,vars.x);
+		//printf("t=%6.3lf  x=%6.3lf delay=%6.3lf\n",vars.t,vars.x,vars.xDelay);
 	}
 	endvals[vars.threadId] = vars.x;
 }

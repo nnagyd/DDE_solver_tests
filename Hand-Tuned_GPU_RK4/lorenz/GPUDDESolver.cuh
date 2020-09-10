@@ -62,7 +62,8 @@ __forceinline__ __device__ void loadValues(double t, threadVariables  * __restri
 __forceinline__ __device__ double denseOutput(double t, threadVariables  * __restrict__ vars, integrationSettings intSettings)
 {
 	double theta = (t - (*vars).tb) / (*vars).deltat;
-	double res = (1 - theta)*(*vars).xb + theta * (*vars).xn + theta * (theta - 1)*((1 - 2 * theta)*((*vars).xn - (*vars).xb) + (theta - 1)*(*vars).deltat*(*vars).xdb + theta * (*vars).deltat*(*vars).xdn);
+	double thetaM1 = theta - 1;
+	double res = -1. * thetaM1 * (*vars).xb + theta * ((*vars).xn + thetaM1 * (1. - 2.*theta)*((*vars).xn-(*vars).xb)+(*vars).dt*(thetaM1*(*vars).xdb + theta*(*vars).xdn));
 	return res;
 }
 
