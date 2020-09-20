@@ -27,8 +27,7 @@ int main()
     const unsigned nrOfDenseVars = 1;
     const unsigned nrOfParameters = 1;
     const unsigned nrOfSteps = 10000;
-    const unsigned unroll = 8;
-    ParallelDDE_RK4<nrOfVars, nrOfDelays, nrOfDenseVars, nrOfParameters,0,unroll> solver;
+    ParallelDDE_RK4<nrOfVars, nrOfDelays, nrOfDenseVars, nrOfParameters> solver;
 
     //parameter sweep
     const unsigned parameters = 18144;
@@ -57,21 +56,16 @@ int main()
 
     //start parameter sweep
     double iStart = seconds();
-    for (size_t i = 0; i < parameters; i += unroll * vecSize)
+    for (size_t i = 0; i < parameters; i++)
     {
         //parameter
-        solver.setParameters(parameterList + i, 0);
+        solver.setParameters(parameterList[i], 0);
 
         //integrate
         solver.integrate(logistic1);
 
         double* endVals = solver.getEndValues();
-
-        for (size_t j = 0; j < unroll * vecSize; j++)
-        {
-            ofs << parameterList[i + j] << "\t" << endVals[j] << std::endl;
-        }
-        delete endVals;
+        ofs << parameterList[i] << "\t" << endVals[0] << std::endl;
     }
     double iElapsed = seconds() - iStart;
 
