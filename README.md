@@ -10,6 +10,12 @@
 * gpu-architecture: elérhető CUDA Compute Capability megadása
 * Több információ a CUDA-ról [itt](https://developer.nvidia.com/cuda-downloads)
 
+### MPGOS GPU
+* Linux és Windows - NVidia Cuda Compiler: ```nvcc -O3 --std=c++14 --ptxas-options=-v --gpu-architecture=sm_61 -lineinfo -maxrregcount=128 -w --resource-usage main.cu -Ipath/to/Massively-Parallel-GPU-ODE-Solver/SourceCodes```
+* gpu-architecture: elérhető CUDA Compute Capability megadása
+* Több információ a CUDA-ról [itt](https://developer.nvidia.com/cuda-downloads)
+* MPGOS letöltése [itt](https://www.gpuode.com/)
+
 ### Julia DifferentialEquation.jl
 * Linux és Windows: ```julia -O3 input.jl```
 * Vagy IDE-n keresztül, pl: Juno
